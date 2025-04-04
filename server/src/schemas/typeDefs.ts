@@ -51,6 +51,7 @@ const typeDefs = `
     user(username: String!): User
     me: User
     plants(limit: Int!): [Plant]
+    searchPlants(searchQuery: String): [Plant!]!
     seedBoxes: [SeedBox]
   }
 

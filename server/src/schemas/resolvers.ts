@@ -43,6 +43,23 @@ const resolvers = {
       return Plant.find().limit(limit).populate('varieties');
     },
 
+    searchPlants: async (_parent: any, { searchQuery }: { searchQuery: string }) => {
+      // If no searchQuery is provided, return all plants
+      if (!searchQuery) {
+        return Plant.find();
+      }
+
+      // Build query with $or to search both name and varieties.variety
+      const query = {
+        $or: [
+          { name: { $regex: new RegExp(searchQuery, 'i') } }, // Search plant name
+          { varieties: { $elemMatch: { variety: { $regex: new RegExp(searchQuery, 'i') } } } }  // Search variety name
+        ]
+      };
+
+      return Plant.find(query);
+    },
+
     seedBoxes: async () => {
       return SeedBox.find();
     },
