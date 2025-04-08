@@ -16,6 +16,35 @@
                 "waterRequirements": "1-2 inches per week",
                 "sunlightRequirements": "6-8 hours per day"
             }
+            ,
+            {
+                "variety": "beefsteak",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "30-48 inches",
+                "waterRequirements": "1-2 inches per week",
+                "sunlightRequirements": "6-8 hours per day"
+            },
+            {
+                "variety": "black krim",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "30-48 inches",
+                "waterRequirements": "1-2 inches per week",
+                "sunlightRequirements": "6-8 hours per day"
+            },
+            {
+                "variety": "dr. wyche's yellow",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "30-48 inches",
+                "waterRequirements": "1-2 inches per week",
+                "sunlightRequirements": "6-8 hours per day"
+            },
+            {
+                "variety": "brandywine",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "30-48 inches",
+                "waterRequirements": "1-2 inches per week",
+                "sunlightRequirements": "6-8 hours per day"
+            }
         ]
     },
     {
@@ -54,6 +83,21 @@
                 "waterRequirements": "1-2 inches per week",
                 "sunlightRequirements": "6-8 hours per day"
             }
+            ,
+            {
+                "variety": "serrano",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "18-24 inches",
+                "waterRequirements": "1-2 inches per week",
+                "sunlightRequirements": "6-8 hours per day"
+            },
+            {
+                "variety": "jalapeno",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "18-24 inches",
+                "waterRequirements": "1-2 inches per week",
+                "sunlightRequirements": "6-8 hours per day"
+            }
         ]
     },
     {
@@ -68,6 +112,231 @@
             },
             {
                 "variety": "butterhead",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    }
+    ,
+    {
+        "name": "beans",
+        "varieties": [
+            {
+                "variety": "1500 year old",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "red swan",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    }
+    ,
+    {
+        "name": "peas",
+        "varieties": [
+            {
+                "variety": "oregon sugar pod",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "green beauty",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    },
+    {
+        "name": "brussels sprouts",
+        "varieties": [
+            {
+                "variety": "groninger",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "red rubine",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    },
+    {
+        "name": "cauliflower",
+        "varieties": [
+            {
+                "variety": "durgesh 41",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "purple of sicily",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    },
+    {
+        "name": "broccoli",
+        "varieties": [
+            {
+                "variety": "rasmus",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "rabe",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    },
+    {
+        "name": "cabbage",
+        "varieties": [
+            {
+                "variety": "filderkraut",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "brunswick",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    },
+    {
+        "name": "carrots",
+        "varieties": [
+            {
+                "variety": "new kuroda",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "koral",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    },
+    {
+        "name": "beets",
+        "varieties": [
+            {
+                "variety": "golden",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "bulls blood",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    },
+    {
+        "name": "cucumber",
+        "varieties": [
+            {
+                "variety": "indian snake",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "armenian",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "dar",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    },
+    {
+        "name": "melon",
+        "varieties": [
+            {
+                "variety": "early girl",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "honey dew",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            }
+        ]
+    },
+    {
+        "name": "squash",
+        "varieties": [
+            {
+                "variety": "crookneck",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "delicata",
+                "seedDepth": "1/4 inch",
+                "seedSpacing": "12-18 inches",
+                "waterRequirements": "1 inch per week",
+                "sunlightRequirements": "4-6 hours per day"
+            },
+            {
+                "variety": "buttercup",
                 "seedDepth": "1/4 inch",
                 "seedSpacing": "12-18 inches",
                 "waterRequirements": "1 inch per week",
