@@ -6,26 +6,26 @@ import { SEARCH_PLANTS } from "../utils/queries";
 
 const SearchPlants = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState(""); // State for the search input
-  const [plants, setPlants] = useState([]); // State to store search results
-  const [noResults, setNoResults] = useState(false); // State to track if no plants are found
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const [plants, setPlants] = useState([]); 
+  const [noResults, setNoResults] = useState(false); 
 
-  // Apollo's useLazyQuery hook to execute the search query on demand
+
   const [searchPlants, { loading, error, data }] = useLazyQuery(SEARCH_PLANTS);
 
   useEffect(() => {
-    // Check if the user is authenticated
+   
     if (!Auth.loggedIn()) {
-      // If not authenticated, redirect to the login page
+     
       navigate("/login");
     }
   }, []);
 
-  // Update plants state when data is returned from the query
+
   useEffect(() => {
     if (data && data.searchPlants) {
       setPlants(data.searchPlants);
-      setNoResults(data.searchPlants.length === 0); // Set noResults to true if no plants are found
+      setNoResults(data.searchPlants.length === 0); 
     }
   }, [data]);
 
@@ -33,8 +33,8 @@ const SearchPlants = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim() !== "") {
-      searchPlants({ variables: { searchQuery } }); // Execute the query with the search input
-      setNoResults(false); // Reset noResults state before the query runs
+      searchPlants({ variables: { searchQuery } });
+      setNoResults(false); 
     }
   };
 
@@ -68,23 +68,24 @@ const SearchPlants = () => {
 
 
   return (
-    <div>
-      <h1>Search Plants</h1>
-      <form onSubmit={handleSearch}>
+    <main className="form-container">
+      <div className="form-card">
+      <div className="form-title">Search Plants</div>
+      <form onSubmit={handleSearch} className="form">
         <input
           type="text"
           placeholder="Search for a plant..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)} // Update search input state
+          onChange={(e) => setSearchQuery(e.target.value)} 
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="submit-button">Search</button>
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
+      {error && <p className= "error-message">Error: {error.message}</p>}
       {noResults && <p>No plants found for "{searchQuery}".</p>}
 
-      <ul>
+      <ul className="search-results">
         {sortedVarieties.map((variety: any, index: number) => {
           const formattedTitle = `${variety.variety} ${variety.plantName}`;
           return (
@@ -96,6 +97,7 @@ const SearchPlants = () => {
         })}
       </ul>
     </div>
+    </main>
   );
 };
 

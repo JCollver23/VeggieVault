@@ -21,10 +21,10 @@ const Header = () => {
         <div>
           {Auth.loggedIn() ? (
             <>
-              <Link className="btn btn-lg btn-info" to="/myseedbox">
-                {Auth.getProfile().data.username}'s Profile
+              <Link className="header-buttons" to="/myseedbox">
+                {Auth.getProfile().data.username}'s Seed Box
               </Link>
-              <button className="btn btn-lg btn-light" onClick={logout}>
+              <button className="header-buttons" onClick={logout}>
                 Logout
               </button>
             </>
