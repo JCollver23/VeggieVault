@@ -1,5 +1,6 @@
 import { User, Plant, SeedBox } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js';
+import { Schema } from 'mongoose';
 
 // Define types for the arguments
 interface AddUserArgs {
@@ -18,6 +19,19 @@ interface LoginUserArgs {
 interface UserArgs {
   username: string;
 }
+
+interface IUserContext {
+  user: {
+    _id: string;
+    username: string;
+    email: string;
+  }
+}
+
+// interface ISeedBoxEntry {
+//   plant: string;
+//   plantVariety: string;
+// }
 
 const resolvers = {
   Query: {
@@ -113,6 +127,72 @@ const resolvers = {
       // Return the token and the user
       return { token, user };
     },
+
+    // savePlant: async (_parent: any, { input }: { input: ISeedBoxEntry }, context: IUserContext): Promise<any> => {
+    //   if (context.user) {
+    //     const updatedSeedBox = await SeedBox.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { entries: input } },
+    //       { new: true }
+    //     );
+
+    //     return updatedSeedBox;
+    //   }
+
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
+    // removeBook: async (_parent: any, { bookId }: { bookId: string }, context: IUserContext): Promise<any> => {
+    //   if (context.user) {
+    //     const updatedUser = await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $pull: { savedBooks: { bookId } } },
+    //       { new: true }
+    //     );
+
+    //     return updatedUser;
+    //   }
+
+    //   throw new AuthenticationError('You need to be logged in!');
+    // }
+
+    savePlant: async (_parent: any, { plantId, varietyId }: {plantId: string, varietyId: string}, context: IUserContext) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+    
+      // Find or create the user's SeedBox
+      let seedBox = await SeedBox.findOne({ user: context.user._id });
+      if (!seedBox) {
+        seedBox = await SeedBox.create({ user: context.user._id, entries: [] });
+      }
+
+      // Convert string IDs to ObjectId
+     // Convert string IDs to Schema.Types.ObjectId
+     const plantObjectId = new Schema.Types.ObjectId(plantId);
+     const varietyObjectId = new Schema.Types.ObjectId(varietyId);
+    
+      // Check if the entry already exists to avoid duplicates
+      const entryExists = seedBox.entries.some(
+        (entry) => entry.plant.toString() === plantId && entry.variety.toString() === varietyId
+      );
+    
+      if (!entryExists) {
+        seedBox.entries.push({
+          plant: plantObjectId,
+          variety: varietyObjectId,
+          // frostHardy: false,
+          // sowDate: undefined,
+          // notes: undefined,
+        } as any);
+        await seedBox.save();
+      }
+    
+      return SeedBox.findOne({ user: context.user._id })
+        .populate('entries.plant')
+        .populate('entries.variety');
+    },
+    
+
   },
 };
 

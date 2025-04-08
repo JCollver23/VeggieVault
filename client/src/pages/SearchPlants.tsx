@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { useNavigate } from "react-router-dom";
 import { SEARCH_PLANTS } from "../utils/queries";
+import { SAVE_PLANT } from "../utils/mutations";
 
 const SearchPlants = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const SearchPlants = () => {
 
   // Apollo's useLazyQuery hook to execute the search query on demand
   const [searchPlants, { loading, error, data }] = useLazyQuery(SEARCH_PLANTS);
+  const [savePlant] = useMutation(SAVE_PLANT);
 
   useEffect(() => {
     // Check if the user is authenticated
@@ -38,12 +40,25 @@ const SearchPlants = () => {
     }
   };
 
+  const handleSave = async (plantId: any, varietyId: any) => {
+    try {
+      await savePlant({
+        variables: { plantId, varietyId },
+      });
+      alert("Plant variety saved to your SeedBox!");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to save plant variety.");
+    }
+  };
+
   const searchTerm = searchQuery.toLowerCase();
 
   const sortedVarieties = plants.flatMap((plant: any) =>
     plant.varieties.map((variety: any) => ({
       ...variety,
       plantName: plant.name,
+      plantId: plant._id, // Include plant ID
       fullName: `${variety.variety} ${plant.name}`.toLowerCase(),
     })))
     .sort((a, b) => {
@@ -64,6 +79,7 @@ const SearchPlants = () => {
 
       return aName.localeCompare(bName);
     });
+
 
 
 
@@ -90,7 +106,7 @@ const SearchPlants = () => {
           return (
             <li key={`${formattedTitle}-${index}`}>
               <h2>{formattedTitle}</h2>
-              {/* <button onClick={() => handleSave(variety)}>Save</button> */}
+               <button onClick={() => handleSave(variety.plantId, variety._id)}>+</button>
             </li>
           );
         })}
