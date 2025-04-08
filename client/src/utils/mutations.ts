@@ -24,4 +24,29 @@ export const ADD_USER = gql`
 }
 `;
 
+export const SAVE_PLANT = gql`
+  mutation savePlant($plantId: String!, $varietyId: String!) {
+    savePlant(plantId: $plantId, varietyId: $varietyId) {
+      success
+      message
+      }
+    }
+`;
+
+// _id
+// entries {
+//   _id
+//   plant {
+//     _id
+//     name
+//   }
+//   variety {
+//     _id
+//     variety
+//     seedDepth
+//     seedSpacing
+//     waterRequirements
+//     sunlightRequirements
+//   }
+
 

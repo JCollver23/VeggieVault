@@ -52,6 +52,11 @@ const typeDefs = `
     user: User
   }
 
+  type SavePlantResponse {
+    success: Boolean!
+    message: String
+  }
+
   type Query {
     users: [User]
     user(username: String!): User
@@ -64,11 +69,10 @@ const typeDefs = `
 
   type Mutation {
     addUser(input: UserInput!): Auth
-    login(email: String!, password: String!): Auth    
+    login(email: String!, password: String!): Auth 
+    savePlant(plantId: String!, varietyId: String!): SavePlantResponse   
   }
 `;
 
 export default typeDefs;
 
-// Removed from above:
-// savePlant(input: SavedPlantInput!): SavedPlant
