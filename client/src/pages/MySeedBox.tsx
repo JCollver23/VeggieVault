@@ -16,9 +16,12 @@ const MySeedBox = () => {
     }
   }, [loggedIn]);
   
-  const { loading, data } = useQuery(QUERY_MY_SEEDBOX, {
+  const { loading, data, error } = useQuery(QUERY_MY_SEEDBOX, {
     skip: !loggedIn, 
   });
+  if (error) {
+    return <div>Error loading seed box data. Please try again later.</div>;
+  }
 
   const mySeedBox = data?.mySeedBox || [];
 
@@ -39,7 +42,10 @@ const MySeedBox = () => {
   return (
     <div className="sub-container">
       <h2>My Seed Box</h2>
-      <p>Click "Add Seed" button to get started!</p>
+      {allEntries.length === 0 && (
+        <p>Click the "Add Seed" button to get started!</p>
+      )}
+
       <div className="add-seed-container">
       <Link to="/search">
         <button className="add-seed-button">
