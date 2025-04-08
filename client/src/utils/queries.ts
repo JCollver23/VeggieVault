@@ -47,6 +47,7 @@ export const SEARCH_PLANTS = gql`
         _id
         name
         varieties {
+          _id
           variety
         }
       }

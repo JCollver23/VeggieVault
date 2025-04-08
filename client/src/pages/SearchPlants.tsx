@@ -40,12 +40,18 @@ const SearchPlants = () => {
     }
   };
 
+
   const handleSave = async (plantId: any, varietyId: any) => {
+    console.log('Saving:', { plantId, varietyId });
     try {
-      await savePlant({
+      const result = await savePlant({
         variables: { plantId, varietyId },
       });
-      alert("Plant variety saved to your SeedBox!");
+      if (result.data.savePlant.success) {
+      window.location.assign('/myseedbox?nocache='+ new Date().getTime()); 
+      return;
+      } 
+      alert(result.data.savePlant.message);
     } catch (err) {
       console.error(err);
       alert("Failed to save plant variety.");
@@ -59,6 +65,7 @@ const SearchPlants = () => {
       ...variety,
       plantName: plant.name,
       plantId: plant._id, // Include plant ID
+      varietyId: variety._id, // Include variety ID
       fullName: `${variety.variety} ${plant.name}`.toLowerCase(),
     })))
     .sort((a, b) => {
@@ -107,7 +114,7 @@ const SearchPlants = () => {
           return (
             <li key={`${formattedTitle}-${index}`}>
               <h2>{formattedTitle}</h2>
-               <button onClick={() => handleSave(variety.plantId, variety._id)}>+</button>
+               <button onClick={() => handleSave(variety.plantId, variety.varietyId)}>+</button>
             </li>
           );
         })}

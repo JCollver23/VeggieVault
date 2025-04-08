@@ -1,6 +1,6 @@
 import { User, Plant, SeedBox } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js';
-import { Schema } from 'mongoose';
+import { Types } from 'mongoose';
 
 // Define types for the arguments
 interface AddUserArgs {
@@ -156,6 +156,7 @@ const resolvers = {
     // }
 
     savePlant: async (_parent: any, { plantId, varietyId }: {plantId: string, varietyId: string}, context: IUserContext) => {
+      console.log('Saving plant:', { plantId, varietyId });
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
       }
@@ -168,8 +169,8 @@ const resolvers = {
 
       // Convert string IDs to ObjectId
      // Convert string IDs to Schema.Types.ObjectId
-     const plantObjectId = new Schema.Types.ObjectId(plantId);
-     const varietyObjectId = new Schema.Types.ObjectId(varietyId);
+     const plantObjectId = new Types.ObjectId(plantId);
+     const varietyObjectId = new Types.ObjectId(varietyId);
     
       // Check if the entry already exists to avoid duplicates
       const entryExists = seedBox.entries.some(
@@ -177,19 +178,14 @@ const resolvers = {
       );
     
       if (!entryExists) {
-        seedBox.entries.push({
-          plant: plantObjectId,
-          variety: varietyObjectId,
-          // frostHardy: false,
-          // sowDate: undefined,
-          // notes: undefined,
-        } as any);
-        await seedBox.save();
+        console.log('Adding new entry to SeedBox:', { plantId, varietyId });
+        await SeedBox.updateOne(
+          { _id: seedBox._id },
+          { $push: { entries: { plant: plantObjectId, variety: varietyObjectId } } }
+        );
+        return { success: true, message: 'Plant variety saved successfully!' };
       }
-    
-      return SeedBox.findOne({ user: context.user._id })
-        .populate('entries.plant')
-        .populate('entries.variety');
+      return { success: false, message: 'Plant is already in your SeedBox'}; // Entry already exists, no need to add
     },
     
 
