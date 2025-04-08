@@ -67,7 +67,6 @@
 
 footer {
   background-color: rgb(48, 44, 38);
-  color: rgb(248, 242, 237);
   text-align: center;
   padding-bottom: 5px;
   padding-top: 10px;
@@ -75,6 +74,10 @@ footer {
   width: 100%;
   bottom: 0;
   left: 0;
+}
+.footer-text{
+  font-size: 14px;
+  color:  rgb(248, 242, 237);
 }
 
 .dropdown-container {
@@ -186,6 +189,7 @@ footer {
   footer {
     padding: 8px;
   }
+
 
   .dropdown-card {
     width: 100%;
