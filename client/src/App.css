@@ -83,7 +83,7 @@ p{
 
 .add-seed-button {
   font-family: 'Farmhouse';
-  display: flex;
+  display: block;
   flex-direction: column;
   align-items: flex-end;  
   font-size: 20px;
@@ -95,16 +95,19 @@ p{
   min-width: 100px;
   max-width: 150px;
   text-align: center;
-  margin: 9px 350px 0px 0px;
+  margin: 20px auto 0 auto;
   border: none;
   outline: none;
   text-decoration: none;
-  position: absolute;
-  right: 0;
 }
+
 .add-seed-button:hover {
   border: none;
   outline: none;
+  text-decoration: none;
+}
+
+.add-seed-container a {
   text-decoration: none;
 }
 
@@ -197,6 +200,7 @@ p{
   .main-container {
     padding: 10px;
   }
+
 
   .form-card {
     padding: 1rem;
