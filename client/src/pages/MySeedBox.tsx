@@ -8,15 +8,17 @@ import { useEffect } from "react";
 
 const MySeedBox = () => {
   const navigate = useNavigate();
-  const { loading, data } = useQuery(QUERY_MY_SEEDBOX);
-
+  const loggedIn = Auth.loggedIn();
+  
   useEffect(() => {
-      // Check if the user is authenticated
-      if (!Auth.loggedIn()) {
-        // If not authenticated, redirect to the login page
-        navigate("/login");
-      }
-    }, []);
+    if (!loggedIn) {
+      navigate("/login");
+    }
+  }, [loggedIn]);
+  
+  const { loading, data } = useQuery(QUERY_MY_SEEDBOX, {
+    skip: !loggedIn, 
+  });
 
   const mySeedBox = data?.mySeedBox || [];
 
@@ -37,6 +39,7 @@ const MySeedBox = () => {
   return (
     <div className="sub-container">
       <h2>My Seed Box</h2>
+      <p>Click "Add Seed" button to get started!</p>
       <div className="add-seed-container">
       <Link to="/search">
         <button className="add-seed-button">

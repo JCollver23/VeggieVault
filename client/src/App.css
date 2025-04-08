@@ -58,6 +58,13 @@ body{
   margin: 0;
 }
 
+p{
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: rgb(48, 44, 38);
+  line-height: 1;
+}
+
 .main-container {
   background-image: url('./assets/images/background.png');
   background-size: cover; 
@@ -76,7 +83,7 @@ body{
 
 .add-seed-button {
   font-family: 'Farmhouse';
-  display: flex;
+  display: block;
   flex-direction: column;
   align-items: flex-end;  
   font-size: 20px;
@@ -88,16 +95,19 @@ body{
   min-width: 100px;
   max-width: 150px;
   text-align: center;
-  margin: 9px 350px 0px 0px;
+  margin: 20px auto 0 auto;
   border: none;
   outline: none;
   text-decoration: none;
-  position: absolute;
-  right: 0;
 }
+
 .add-seed-button:hover {
   border: none;
   outline: none;
+  text-decoration: none;
+}
+
+.add-seed-container a {
   text-decoration: none;
 }
 
@@ -173,10 +183,24 @@ body{
   font-family: 'Poppins';
   font-size: 16px;
 }
+
+.search-results li {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background-color: #ffffff;
+}
+
+
+
+
+
 @media (max-width: 768px) {
   .main-container {
     padding: 10px;
   }
+
 
   .form-card {
     padding: 1rem;

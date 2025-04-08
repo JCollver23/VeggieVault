@@ -15,8 +15,6 @@ const DropdownCard = () => {
       </button>
 
       <div className={`dropdown-card ${isOpen ? 'open' : ''}`}>
-        <h3>Card Title</h3>
-        <p>This is a dropdown card with some useful content inside.</p>
       </div>
     </div>
   );
