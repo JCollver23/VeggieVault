@@ -46,7 +46,7 @@ const resolvers = {
     searchPlants: async (_parent: any, { searchQuery }: { searchQuery: string }) => {
       // If no searchQuery is provided, return all plants
       if (!searchQuery) {
-        return Plant.find();
+        return Plant.find().populate('varieties');
       }
 
       // Build query with $or to search both name and varieties.variety
@@ -57,7 +57,7 @@ const resolvers = {
         ]
       };
 
-      return Plant.find(query);
+      return Plant.find(query).populate('varieties');
     },
 
     seedBoxes: async () => {
