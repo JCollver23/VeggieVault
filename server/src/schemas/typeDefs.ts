@@ -70,7 +70,8 @@ const typeDefs = `
   type Mutation {
     addUser(input: UserInput!): Auth
     login(email: String!, password: String!): Auth 
-    savePlant(plantId: String!, varietyId: String!): SavePlantResponse   
+    savePlant(plantId: String!, varietyId: String!): SavePlantResponse
+    removePlant(plantId: String!, varietyId: String!): SavePlantResponse
 
     updateSeedboxEntry(
       entryId: ID!

@@ -187,6 +187,39 @@ const resolvers = {
       return { success: false, message: 'Plant is already in your SeedBox' }; // Entry already exists, no need to add
     },
 
+    removePlant: async (_parent: any, { plantId, varietyId }: { plantId: string; varietyId: string }, context: IUserContext) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+      // Find the user's SeedBox
+      const seedBox = await SeedBox.findOne({ user: context.user._id });
+
+      if (!seedBox) {
+        throw new Error('SeedBox not found for user.');
+      }
+
+      // Check if the entry exists in the SeedBox
+      const entryExists = seedBox.entries.some(
+        (entry) => entry.plant.toString() === plantId && entry.variety.toString() === varietyId
+      );
+
+      if (entryExists) {
+        // Convert string IDs to ObjectId
+        const plantObjectId = new Types.ObjectId(plantId);
+        const varietyObjectId = new Types.ObjectId(varietyId);
+
+        // Remove the entry from the SeedBox
+        await SeedBox.findOneAndUpdate(
+          { user: context.user._id },
+          { $pull: { entries: { plant: plantObjectId, variety: varietyObjectId } } }          
+        );
+
+        return { success: true, message: 'Plant removed successfully!' };
+      }
+
+      return { success: false, message: 'That plant is not in your seedbox.' };
+    },
+
     updateSeedboxEntry: async (_parent: any, { entryId, frostHardy, sowDate, notes }: { entryId: string; frostHardy: boolean; sowDate: string; notes: string }, context: IUserContext) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
