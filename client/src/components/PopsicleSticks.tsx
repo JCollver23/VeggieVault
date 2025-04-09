@@ -5,6 +5,7 @@ import './style.css';
 interface PopsicleStickButtonProps {
   title: string;
   children: React.ReactNode;
+  allowAdd: boolean;
 }
 
 const PopsicleStickButton: React.FC<PopsicleStickButtonProps> = ({ title, children }) => {
