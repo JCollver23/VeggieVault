@@ -42,7 +42,6 @@ const SearchPlants = () => {
 
 
   const handleSave = async (plantId: any, varietyId: any) => {
-    console.log('Saving:', { plantId, varietyId });
     try {
       const result = await savePlant({
         variables: { plantId, varietyId },
