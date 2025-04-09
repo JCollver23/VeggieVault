@@ -29,8 +29,28 @@ export const SAVE_PLANT = gql`
     savePlant(plantId: $plantId, varietyId: $varietyId) {
       success
       message
+      data {
+        _id
+        user
+        entries {  
+          _id          
+          plant {
+            name
+          }
+          variety {
+            variety
+            seedDepth
+            seedSpacing
+            waterRequirements
+            sunlightRequirements
+          }
+          frostHardy
+          sowDate
+          notes
+        }
       }
     }
+  }
 `;
 
 export const REMOVE_PLANT = gql`
