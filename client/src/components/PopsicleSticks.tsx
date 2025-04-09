@@ -7,9 +7,11 @@ interface PopsicleStickButtonProps {
   children: React.ReactNode;
   allowAdd?: boolean;
   saveHandler?: () => void;
+  allowRemove?: boolean;
+  removeHandler?: () => void;
 }
 
-const PopsicleStickButton: React.FC<PopsicleStickButtonProps> = ({ title, children, allowAdd, saveHandler }) => {
+const PopsicleStickButton: React.FC<PopsicleStickButtonProps> = ({ title, children, allowAdd, saveHandler, allowRemove, removeHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -18,10 +20,15 @@ const PopsicleStickButton: React.FC<PopsicleStickButtonProps> = ({ title, childr
 
   return (
     <div className="dropdown-container">
-      <button className="homepage-buttons" onClick={toggleDropdown}>
+          <div className="homepage-button-wrapper">
+      <span className="homepage-buttons" onClick={toggleDropdown}>
         {title}
+        </span>
+        <div className="action-buttons">
         {allowAdd && <button className="add-button" onClick={saveHandler}>+</button>}
-      </button>
+        {allowRemove && <button className="remove-button" onClick={removeHandler}>-</button>}
+      </div>
+      </div>
       <div className={`dropdown-card ${isOpen ? 'open' : ''}`}>
         {children}
       </div>

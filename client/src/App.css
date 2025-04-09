@@ -6,7 +6,7 @@ button {
 
 @font-face {
     font-family: 'Farmhouse';
-    src: url('../src/assets/fonts/Farmhouse\ 2.otf') format('truetype');
+    src: url('../src/assets/fonts/Farmhouse.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
@@ -20,8 +20,8 @@ button {
 
 
   @font-face {
-    font-family: 'Only You';
-    src: url('../src/assets/fonts/Only\ You.ttf') format('truetype');
+    font-family: 'Only_You';
+    src: url('../src/assets/fonts/Only_You.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
@@ -163,7 +163,7 @@ p{
 .submit-button {
   background-color: rgb(229, 211, 177);
   color: rgb(48, 44, 38);
-  font-family: 'Only You';
+  font-family: 'Only_You';
   font-size: 22px;
   padding: 8px 12px;
   border: none;

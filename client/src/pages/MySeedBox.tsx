@@ -1,29 +1,24 @@
 import '../App.css';
 import PopsicleStickButton from '../components/PopsicleSticks';
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_MY_SEEDBOX } from '../utils/queries';
 import { Link, useNavigate } from 'react-router-dom';
 import Auth from "../utils/auth";
 import { useEffect } from "react";
 import SeedUpdate from '../components/SeedUpdate';
-
-// interface SeedBoxEntryI {
-//   _id: string;
-//   frostHardy: boolean;
-//   sowDate: string;
-//   notes: string;
-// }
+import { REMOVE_PLANT } from '../utils/mutations';
 
 const MySeedBox = () => {
   const navigate = useNavigate();
   const loggedIn = Auth.loggedIn();
-
 
   useEffect(() => {
     if (!loggedIn) {
       navigate("/login");
     }
   }, [loggedIn]);
+
+  const [removePlant] = useMutation(REMOVE_PLANT);
   
   const { loading, data, error } = useQuery(QUERY_MY_SEEDBOX, {
     skip: !loggedIn, 
@@ -32,11 +27,22 @@ const MySeedBox = () => {
     return <div>Error loading seed box data. Please try again later.</div>;
   }
 
+  const handleRemove = async (entryId: any) => {
+    try {
+      await removePlant({
+        variables: { entryId },
+      });      
+    } catch (err) {
+      console.error(err);
+      alert("Failed to remove plant.");
+    }
+  };
+
   const mySeedBox = data?.mySeedBox || [];
 
   const allEntries = (mySeedBox && mySeedBox.entries?.length > 0 ? mySeedBox.entries.map((entry: any) =>
   ({
-    _id: entry._id,
+    _id: entry._id,    
     plantType: entry.plant.name,
     variety: entry.variety.variety,
     seedDepth: entry.variety.seedDepth,
@@ -71,6 +77,8 @@ const MySeedBox = () => {
             <PopsicleStickButton
               key={`${entry.variety}${index}`}
               title={formattedTitle}
+              allowRemove={true}
+              removeHandler={() => handleRemove(entry._id)}
             >
               <SeedUpdate entry={entry} />
             </PopsicleStickButton>
