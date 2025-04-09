@@ -20,7 +20,12 @@ const seedDatabase = async (): Promise<void> => {
       const plantVarieties = varieties.map(variety => variety._id);
 
       // Create the plant with the variety IDs
-      await Plant.create({ name: plant.name, varieties: plantVarieties });
+      const newPlant = await Plant.create({ name: plant.name, varieties: plantVarieties });
+
+      plantVarieties.forEach(async (varietyId) => {
+        // Update the variety to reference the its parent plant
+        await PlantVariety.findByIdAndUpdate(varietyId, { plant: newPlant._id });
+      });
     }
 
     console.log('Users and Plants seeded successfully!');
