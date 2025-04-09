@@ -29,8 +29,10 @@ export const QUERY_ME = gql`
 export const QUERY_TOP_PLANTS = gql`
   query topPlants {
     plants(limit: 10) {
+      _id
       name
       varieties {
+        _id
         variety
         seedDepth
         seedSpacing
