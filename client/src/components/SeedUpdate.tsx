@@ -1,6 +1,7 @@
 import { UPDATE_SEEDBOX_ENTRY } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
+import './style.css'; 
 
 interface SeedUpdateProps {
     entry: {
@@ -21,6 +22,7 @@ const SeedUpdate = ({entry}: SeedUpdateProps) => {
     const [frostHardy, setFrostHardy] = useState(entry.frostHardy);
     const [sowDate, setSowDate] = useState(entry.sowDate || '');
     const [notes, setNotes] = useState(entry.notes || '');
+    const [showSaveMessage, setShowSaveMessage] = useState(false);
 
     const handleFrostHardyChange = () => {
         setFrostHardy(!frostHardy);
@@ -42,7 +44,8 @@ const SeedUpdate = ({entry}: SeedUpdateProps) => {
                     entryId: entry._id,
                 }
             });
-            alert("Seed box entry updated successfully!");
+            setShowSaveMessage(true);  
+            setTimeout(() => setShowSaveMessage(false), 4000);  
         } catch (error) {
             console.error("Error updating seed box entry:", error);
             alert("Failed to update seed box entry.");
@@ -56,7 +59,7 @@ const SeedUpdate = ({entry}: SeedUpdateProps) => {
             <li><strong>Water:</strong> {entry.waterRequirements}</li>
             <li><strong>Sunlight:</strong> {entry.sunlightRequirements}</li>
             <li>
-                  <strong>Frost Hardy:</strong>
+                  <strong>Frost Hardy?:</strong>
                   <input
                     type="checkbox"
                     checked={frostHardy}
@@ -85,10 +88,16 @@ const SeedUpdate = ({entry}: SeedUpdateProps) => {
                     />
                 </li>
         
-            <button
+                <button
                 className="save-button"
                 onClick={handleSave}
             >Save</button>
+
+            {showSaveMessage && (
+                <div className="save-message">
+                    Entry saved!
+                </div>
+            )}
         </ul>
     );
 }
