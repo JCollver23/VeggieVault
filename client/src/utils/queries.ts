@@ -54,11 +54,13 @@ export const SEARCH_PLANTS = gql`
     }
   `;
 
-export const QUERY_MY_SEEDBOX = gql`
+  export const QUERY_MY_SEEDBOX = gql`
   query MySeedBox {
     mySeedBox {
+      _id
       user
-      entries {            
+      entries {  
+        _id          
         plant {
           name
         }
@@ -76,3 +78,9 @@ export const QUERY_MY_SEEDBOX = gql`
     }  
   }
 `
+
+
+
+
+
+

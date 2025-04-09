@@ -33,6 +33,17 @@ export const SAVE_PLANT = gql`
     }
 `;
 
+export const UPDATE_SEEDBOX_ENTRY = gql`
+ mutation UpdateSeedboxEntry($entryId: ID!, $frostHardy: Boolean, $sowDate: String, $notes: String) {
+  updateSeedboxEntry(entryId: $entryId, frostHardy: $frostHardy, sowDate: $sowDate, notes: $notes) {
+    _id
+    frostHardy
+    notes
+    sowDate
+  }
+}
+`;
+
 // _id
 // entries {
 //   _id
