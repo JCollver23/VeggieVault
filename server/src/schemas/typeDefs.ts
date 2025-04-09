@@ -55,6 +55,7 @@ const typeDefs = `
   type SavePlantResponse {
     success: Boolean!
     message: String
+    data: SeedBox
   }
 
   type Query {

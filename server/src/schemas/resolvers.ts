@@ -146,9 +146,15 @@ const resolvers = {
           { _id: seedBox._id },
           { $push: { entries: { plant: plantObjectId, variety: varietyObjectId } } }
         );
-        return { success: true, message: 'Plant variety saved successfully!' };
+
+        const updated = await SeedBox.findOne({ user: context.user._id })
+          .populate('entries.plant').populate('entries.variety');
+
+        // Return the updated SeedBox to refresh the cache
+        return { success: true, message: 'Plant variety saved successfully!', data: updated };
       }
-      return { success: false, message: 'Plant is already in your SeedBox' }; 
+
+      return { success: false, message: 'Plant is already in your SeedBox' };
     },
 
     removePlant: async (_parent: any, { entryId }: { entryId: string }, context: IUserContext) => {
