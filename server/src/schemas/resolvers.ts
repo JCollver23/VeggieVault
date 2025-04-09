@@ -188,6 +188,24 @@ const resolvers = {
       return { success: false, message: 'Plant is already in your SeedBox'}; // Entry already exists, no need to add
     },
     
+    updateSeedboxEntry: async (_parent: any, { entryId, frostHardy, sowDate, notes }: { entryId: string; frostHardy: boolean; sowDate: string; notes: string }, context: IUserContext) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      // Find the SeedBox entry by ID and update it
+      const updatedEntry = await SeedBox.findOneAndUpdate(
+        { 'entries._id': entryId },
+        { $set: { 'entries.$.frostHardy': frostHardy, 'entries.$.sowDate': sowDate, 'entries.$.notes': notes } },
+        { new: true }
+      );
+
+      if (!updatedEntry) {
+        throw new Error('SeedBox entry not found.');
+      }
+
+      return updatedEntry;
+    }
 
   },
 };

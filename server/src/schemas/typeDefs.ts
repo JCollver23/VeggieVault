@@ -71,6 +71,13 @@ const typeDefs = `
     addUser(input: UserInput!): Auth
     login(email: String!, password: String!): Auth 
     savePlant(plantId: String!, varietyId: String!): SavePlantResponse   
+
+    updateSeedboxEntry(
+      entryId: ID!
+      frostHardy: Boolean
+      sowDate: String
+      notes: String
+    ): SeedBoxEntry
   }
 `;
 
