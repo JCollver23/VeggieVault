@@ -22,7 +22,7 @@ const typeDefs = `
   }
 
   type SeedBoxEntry {
-    _id: ID 
+    _id: ID! 
     plant: Plant!
     variety: PlantVariety
     frostHardy: Boolean
@@ -71,7 +71,7 @@ const typeDefs = `
     addUser(input: UserInput!): Auth
     login(email: String!, password: String!): Auth 
     savePlant(plantId: String!, varietyId: String!): SavePlantResponse
-    removePlant(plantId: String!, varietyId: String!): SavePlantResponse
+    removePlant(entryId: String!): SeedBox
 
     updateSeedboxEntry(
       entryId: ID!
