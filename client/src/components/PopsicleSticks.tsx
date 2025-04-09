@@ -20,11 +20,15 @@ const PopsicleStickButton: React.FC<PopsicleStickButtonProps> = ({ title, childr
 
   return (
     <div className="dropdown-container">
+          <div className="homepage-button-wrapper">
       <span className="homepage-buttons" onClick={toggleDropdown}>
         {title}
+        </span>
+        <div className="action-buttons">
         {allowAdd && <button className="add-button" onClick={saveHandler}>+</button>}
         {allowRemove && <button className="remove-button" onClick={removeHandler}>-</button>}
-      </span>
+      </div>
+      </div>
       <div className={`dropdown-card ${isOpen ? 'open' : ''}`}>
         {children}
       </div>
