@@ -12,11 +12,11 @@ const HomePage = () => {
 
   const plantData = data?.plants || [];
 
-  
-  const allVarieties = plantData.flatMap((plant:any) =>
-    plant.varieties.map((variety:any) => ({
+
+  const allVarieties = plantData.flatMap((plant: any) =>
+    plant.varieties.map((variety: any) => ({
       ...variety,
-      plantType: plant.name, 
+      plantType: plant.name,
     }))
   );
   return (
@@ -46,11 +46,27 @@ const HomePage = () => {
             title={formattedTitle}
           >
           <ul className="seed-packet-details">
-            <li><strong>Seed Depth:</strong> {variety.seedDepth}</li>
-            <li><strong>Seed Spacing:</strong> {variety.seedSpacing}</li>
-            <li><strong>Water:</strong> {variety.waterRequirements}</li>
-            <li><strong>Sunlight:</strong> {variety.sunlightRequirements}</li>
-          </ul>
+                <li>Seed Depth: {variety.seedDepth}</li>
+                <li>Seed Spacing: {variety.seedSpacing}</li>
+                <li>Water:{variety.waterRequirements}</li>
+                <li>Sunlight: {variety.sunlightRequirements}</li>
+                <li>
+                  Frost Hardy?: <span className= "edit-message">  (check in <strong>My Seed Box</strong>) </span>
+                </li>
+
+                <li>
+                  Sow Date: <span className= "edit-message"> (edit in <strong>My Seed Box</strong>)</span>
+                </li>
+
+                <li>
+                  Notes: <span className= "edit-message">(add notes in <strong>My Seed Box</strong>)</span>
+                  <textarea
+                    style={{ marginLeft: '0.5em', width: '100%', height: '50px' }}
+                  />
+
+                </li>
+
+              </ul>
         </PopsicleStickButton>
        );
       })}

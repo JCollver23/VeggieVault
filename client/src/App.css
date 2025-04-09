@@ -206,7 +206,11 @@ p{
   padding: 0; 
 }
 
-
+.edit-message{
+  color: rgb(196, 84, 43);
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+}
 
 
 

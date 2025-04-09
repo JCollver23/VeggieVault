@@ -31,6 +31,7 @@
   margin-left: auto;
 }
 
+
 .sub-container {
   display: flex;
   flex-direction: column;
@@ -139,6 +140,44 @@ footer {
   height: 1px;
   background-color: rgb(48 44 38);
 }
+.save-button {
+  font-family: 'Farmhouse';
+  display: block;
+  flex-direction: column;
+  align-items: flex-end;  
+  font-size: 18px;
+  color: rgb(248, 242, 237);
+  background-color: rgb(179, 93, 65);
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+  clip-path: polygon(0% 50%, 15% 0%, 100% 0%, 100% 100%, 15% 100%, 0% 50%);
+  min-width: 60px;
+  max-width: 80px;
+  text-align: center;
+  margin: 20px auto 0 auto;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
+
+.save-button {
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.save-message {
+  margin-top: -1.75em;
+  margin-right: 1em;
+  color: rgb(38, 184, 38);
+  font-weight: bold;
+  text-align: right;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  font-size: 16px;
+}
+
+
 
 @media (max-width: 768px) {
 
