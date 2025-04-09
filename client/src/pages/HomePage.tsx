@@ -5,6 +5,7 @@ import { QUERY_TOP_PLANTS } from "../utils/queries";
 import { SAVE_PLANT } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const HomePage = () => {
   const loggedIn = Auth.loggedIn();
@@ -12,19 +13,19 @@ const HomePage = () => {
   const { loading, data } = useQuery(QUERY_TOP_PLANTS);
   const [savePlant] = useMutation(SAVE_PLANT);
 
+  const [saveMessage, setSaveMessage] = useState('');
+
   const handleSave = async (plantId: any, varietyId: any) => {
     try {
       const result = await savePlant({
         variables: { plantId, varietyId },
       });
-      if (result.data.savePlant.success) {
-        window.location.assign('/myseedbox?nocache=' + new Date().getTime());
-        return;
-      }
-      alert(result.data.savePlant.message);
+      setSaveMessage(result.data.savePlant.message);
+      setTimeout(() => setSaveMessage(''), 5000);
     } catch (err) {
       console.error(err);
-      alert("Failed to save plant variety.");
+      setSaveMessage("Failed to save plant variety.");
+      setTimeout(() => setSaveMessage(''), 5000);
     }
   };
 
@@ -44,6 +45,7 @@ const HomePage = () => {
 
   return (
     <div className="sub-container">
+
       <div className="homepage-description">
         {loggedIn ?
           (<>
@@ -61,31 +63,40 @@ const HomePage = () => {
         }
       </div>
 
+      {saveMessage && (
+        <div className="add-save-message">
+          {saveMessage}
+        </div>
+      )}
+
+
       {loading ? (<div>Loading...</div>) :
         allVarieties.map((variety: any, index: number) => {
           const formattedTitle = `${(variety.variety)} ${(variety.plantType)}`;
           return (
+
             <PopsicleStickButton
               key={`${variety.variety}${index}`}
               title={formattedTitle}
               allowAdd={loggedIn}
               saveHandler={() => handleSave(variety.plantId, variety.varietyId)}
             >
+
               <ul className="seed-packet-details">
                 <li>Seed Depth: {variety.seedDepth}</li>
                 <li>Seed Spacing: {variety.seedSpacing}</li>
                 <li>Water:{variety.waterRequirements}</li>
                 <li>Sunlight: {variety.sunlightRequirements}</li>
                 <li>
-                  Frost Hardy?: <span className="edit-message">  (check in <strong>My Seed Box</strong>) </span>
+                  Frost Hardy?: <span className="edit-message">  (check in <a href="/myseedbox" ><strong>My Seed Box</strong></a>) </span>
                 </li>
 
                 <li>
-                  Sow Date: <span className="edit-message"> (edit in <strong>My Seed Box</strong>)</span>
+                  Sow Date: <span className="edit-message"> (edit in <a href="/myseedbox" ><strong>My Seed Box</strong></a>)</span>
                 </li>
 
                 <li>
-                  Notes: <span className="edit-message">(add notes in <strong>My Seed Box</strong>)</span>
+                  Notes: <span className="edit-message">(add notes in <a href="/myseedbox" ><strong>My Seed Box</strong></a>)</span>
                   <textarea
                     style={{ marginLeft: '0.5em', width: '100%', height: '50px' }}
                   />
@@ -93,10 +104,13 @@ const HomePage = () => {
                 </li>
 
               </ul>
+
             </PopsicleStickButton>
           );
         })}
     </div>
+
+
   );
 };
 

@@ -212,6 +212,13 @@ p{
   font-family: 'Poppins', sans-serif;
 }
 
+.edit-message a {
+  color: rgb(196, 84, 43);
+  font-size: 13px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+
 
 
 @media (max-width: 768px) {
