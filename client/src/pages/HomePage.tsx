@@ -66,10 +66,11 @@ const HomePage = () => {
         allVarieties.map((variety: any, index: number) => {
           const formattedTitle = `${(variety.variety)} ${(variety.plantType)}`;
           return (
-            <div key={`${variety.variety}-${index}`} className="popsicle-with-save">
               <PopsicleStickButton
                 key={`${variety.variety}${index}`}
                 title={formattedTitle}
+                allowAdd={loggedIn}
+                saveHandler={() => handleSave(variety.plantId, variety.varietyId)}
               >
                 <ul className="seed-packet-details">
                   <li><strong>Seed Depth:</strong> {variety.seedDepth}</li>
@@ -78,13 +79,6 @@ const HomePage = () => {
                   <li><strong>Sunlight:</strong> {variety.sunlightRequirements}</li>
                 </ul>
               </PopsicleStickButton>
-              <button
-                className="save-button"
-                onClick={() => handleSave(variety.plantId, variety.varietyId)}
-              >
-                +
-              </button>
-            </div>
           );
         })}
     </div>
