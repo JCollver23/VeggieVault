@@ -15,6 +15,8 @@ const SearchPlants = () => {
   const [searchPlants, { loading, error, data }] = useLazyQuery(SEARCH_PLANTS);
   const [savePlant] = useMutation(SAVE_PLANT);
 
+  const [saveMessage, setSaveMessage] = useState('');
+
   useEffect(() => {
    
     if (!Auth.loggedIn()) {
@@ -41,19 +43,33 @@ const SearchPlants = () => {
   };
 
 
+  // const handleSave = async (plantId: any, varietyId: any) => {
+  //   try {
+  //     const result = await savePlant({
+  //       variables: { plantId, varietyId },
+  //     });
+  //     // if (result.data.savePlant.success) {
+  //     // window.location.assign('/myseedbox?nocache='+ new Date().getTime()); 
+  //     // return;
+  //     // } 
+  //     alert(result.data.savePlant.message);
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Failed to save plant variety.");
+  //   }
+  // };
+
   const handleSave = async (plantId: any, varietyId: any) => {
     try {
       const result = await savePlant({
         variables: { plantId, varietyId },
       });
-      if (result.data.savePlant.success) {
-      window.location.assign('/myseedbox?nocache='+ new Date().getTime()); 
-      return;
-      } 
-      alert(result.data.savePlant.message);
+      setSaveMessage(result.data.savePlant.message);
+      setTimeout(() => setSaveMessage(''), 5000);
     } catch (err) {
       console.error(err);
-      alert("Failed to save plant variety.");
+      setSaveMessage("Failed to save plant variety.");
+      setTimeout(() => setSaveMessage(''), 5000);
     }
   };
 
@@ -108,6 +124,11 @@ const SearchPlants = () => {
       {noResults && <p>No plants found for "{searchQuery}".</p>}
 
       <ul className="search-results">
+      {saveMessage && (
+    <div className="add-save-message">
+      {saveMessage}
+    </div>
+  )}
         {sortedVarieties.map((variety: any, index: number) => {
           const formattedTitle = `${variety.variety} ${variety.plantName}`;
           return (

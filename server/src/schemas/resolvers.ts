@@ -28,11 +28,6 @@ interface IUserContext {
   }
 }
 
-// interface ISeedBoxEntry {
-//   plant: string;
-//   plantVariety: string;
-// }
-
 const resolvers = {
   Query: {
     users: async () => {
@@ -127,33 +122,6 @@ const resolvers = {
       return { token, user };
     },
 
-    // savePlant: async (_parent: any, { input }: { input: ISeedBoxEntry }, context: IUserContext): Promise<any> => {
-    //   if (context.user) {
-    //     const updatedSeedBox = await SeedBox.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $push: { entries: input } },
-    //       { new: true }
-    //     );
-
-    //     return updatedSeedBox;
-    //   }
-
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
-    // removeBook: async (_parent: any, { bookId }: { bookId: string }, context: IUserContext): Promise<any> => {
-    //   if (context.user) {
-    //     const updatedUser = await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $pull: { savedBooks: { bookId } } },
-    //       { new: true }
-    //     );
-
-    //     return updatedUser;
-    //   }
-
-    //   throw new AuthenticationError('You need to be logged in!');
-    // }
-
     savePlant: async (_parent: any, { plantId, varietyId }: { plantId: string, varietyId: string }, context: IUserContext) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
@@ -165,8 +133,6 @@ const resolvers = {
         seedBox = await SeedBox.create({ user: context.user._id, entries: [] });
       }
 
-      // Convert string IDs to ObjectId
-      // Convert string IDs to Schema.Types.ObjectId
       const plantObjectId = new Types.ObjectId(plantId);
       const varietyObjectId = new Types.ObjectId(varietyId);
 
@@ -182,7 +148,7 @@ const resolvers = {
         );
         return { success: true, message: 'Plant variety saved successfully!' };
       }
-      return { success: false, message: 'Plant is already in your SeedBox' }; // Entry already exists, no need to add
+      return { success: false, message: 'Plant is already in your SeedBox' }; 
     },
 
     removePlant: async (_parent: any, { entryId }: { entryId: string }, context: IUserContext) => {
