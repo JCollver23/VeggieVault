@@ -33,6 +33,31 @@ export const SAVE_PLANT = gql`
     }
 `;
 
+export const REMOVE_PLANT = gql`
+  mutation removePlant($entryId: String!) {
+    removePlant(entryId: $entryId) {
+      _id
+      user
+      entries {  
+        _id          
+        plant {
+          name
+        }
+        variety {
+          variety
+          seedDepth
+          seedSpacing
+          waterRequirements
+          sunlightRequirements
+        }
+        frostHardy
+        sowDate
+        notes
+      }
+    }
+  }
+`;
+
 export const UPDATE_SEEDBOX_ENTRY = gql`
  mutation UpdateSeedboxEntry($entryId: ID!, $frostHardy: Boolean, $sowDate: String, $notes: String) {
   updateSeedboxEntry(entryId: $entryId, frostHardy: $frostHardy, sowDate: $sowDate, notes: $notes) {

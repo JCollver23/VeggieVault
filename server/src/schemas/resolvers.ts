@@ -155,7 +155,6 @@ const resolvers = {
     // }
 
     savePlant: async (_parent: any, { plantId, varietyId }: { plantId: string, varietyId: string }, context: IUserContext) => {
-      console.log('Saving plant:', { plantId, varietyId });
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
       }
@@ -177,7 +176,6 @@ const resolvers = {
       );
 
       if (!entryExists) {
-        console.log('Adding new entry to SeedBox:', { plantId, varietyId });
         await SeedBox.updateOne(
           { _id: seedBox._id },
           { $push: { entries: { plant: plantObjectId, variety: varietyObjectId } } }
@@ -185,6 +183,32 @@ const resolvers = {
         return { success: true, message: 'Plant variety saved successfully!' };
       }
       return { success: false, message: 'Plant is already in your SeedBox' }; // Entry already exists, no need to add
+    },
+
+    removePlant: async (_parent: any, { entryId }: { entryId: string }, context: IUserContext) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      // Find a SeedBox for the user and entry ID
+      const seedBox = await SeedBox.findOne({
+        user: context.user._id,
+        'entries._id': entryId
+      });
+
+      if (!seedBox) {
+        throw new Error('Failed to find SeedBox with that user and entry ID.');
+      }
+
+      // Remove the entry and return the updated SeedBox
+      await SeedBox.findOneAndUpdate(
+        { user: context.user._id },
+        { $pull: { entries: { _id: entryId } } }
+      );
+
+      // Return the updated SeedBox
+      return SeedBox.findOne({ user: context.user._id })
+        .populate('entries.plant').populate('entries.variety');
     },
 
     updateSeedboxEntry: async (_parent: any, { entryId, frostHardy, sowDate, notes }: { entryId: string; frostHardy: boolean; sowDate: string; notes: string }, context: IUserContext) => {
