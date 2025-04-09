@@ -1,4 +1,4 @@
-import { User, Plant, SeedBox } from '../models/index.js';
+import { User, Plant, SeedBox, PlantVariety } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js';
 import { Types } from 'mongoose';
 
@@ -63,15 +63,14 @@ const resolvers = {
         return Plant.find().populate('varieties');
       }
 
-      // Build query with $or to search both name and varieties.variety
-      const query = {
-        $or: [
-          { name: { $regex: new RegExp(searchQuery, 'i') } }, // Search plant name
-          { varieties: { $elemMatch: { variety: { $regex: new RegExp(searchQuery, 'i') } } } }  // Search variety name
-        ]
-      };
+      // Search both plants and varieties and return the plants that match either
+      const plantsFound = await Plant.find({ name: { $regex: new RegExp(searchQuery, 'i') } }).select('_id');
+      const varietiesFound = await PlantVariety.find({ variety: { $regex: new RegExp(searchQuery, 'i') } }).select('plant');
 
-      return Plant.find(query).populate('varieties');
+      const foundIds = [...plantsFound.map((plant: any) => plant._id), ...varietiesFound.map((variety: any) => variety.plant)];
+
+      // Return all Plants with an id in foundIds
+      return await Plant.find({ _id: { $in: foundIds } }).populate('varieties');
     },
 
     seedBoxes: async () => {
@@ -155,12 +154,12 @@ const resolvers = {
     //   throw new AuthenticationError('You need to be logged in!');
     // }
 
-    savePlant: async (_parent: any, { plantId, varietyId }: {plantId: string, varietyId: string}, context: IUserContext) => {
+    savePlant: async (_parent: any, { plantId, varietyId }: { plantId: string, varietyId: string }, context: IUserContext) => {
       console.log('Saving plant:', { plantId, varietyId });
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
       }
-    
+
       // Find or create the user's SeedBox
       let seedBox = await SeedBox.findOne({ user: context.user._id });
       if (!seedBox) {
@@ -168,15 +167,15 @@ const resolvers = {
       }
 
       // Convert string IDs to ObjectId
-     // Convert string IDs to Schema.Types.ObjectId
-     const plantObjectId = new Types.ObjectId(plantId);
-     const varietyObjectId = new Types.ObjectId(varietyId);
-    
+      // Convert string IDs to Schema.Types.ObjectId
+      const plantObjectId = new Types.ObjectId(plantId);
+      const varietyObjectId = new Types.ObjectId(varietyId);
+
       // Check if the entry already exists to avoid duplicates
       const entryExists = seedBox.entries.some(
         (entry) => entry.plant.toString() === plantId && entry.variety.toString() === varietyId
       );
-    
+
       if (!entryExists) {
         console.log('Adding new entry to SeedBox:', { plantId, varietyId });
         await SeedBox.updateOne(
@@ -185,9 +184,9 @@ const resolvers = {
         );
         return { success: true, message: 'Plant variety saved successfully!' };
       }
-      return { success: false, message: 'Plant is already in your SeedBox'}; // Entry already exists, no need to add
+      return { success: false, message: 'Plant is already in your SeedBox' }; // Entry already exists, no need to add
     },
-    
+
     updateSeedboxEntry: async (_parent: any, { entryId, frostHardy, sowDate, notes }: { entryId: string; frostHardy: boolean; sowDate: string; notes: string }, context: IUserContext) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
