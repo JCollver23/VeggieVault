@@ -1,6 +1,7 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document, ObjectId } from 'mongoose';
 
 interface IPlantVariety extends Document {
+    plant: ObjectId;
     variety: string;
     seedDepth: string;
     seedSpacing: string;
@@ -10,6 +11,10 @@ interface IPlantVariety extends Document {
 
 const plantVarietySchema = new Schema<IPlantVariety>(
     {
+        plant: {
+            type: Schema.Types.ObjectId,
+            ref: 'Plant'
+        },
         variety: {
             type: String,
             required: true,

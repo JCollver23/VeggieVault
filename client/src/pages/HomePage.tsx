@@ -3,8 +3,12 @@ import PopsicleStickButton from '../components/PopsicleSticks';
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_TOP_PLANTS } from "../utils/queries";
 import { SAVE_PLANT } from "../utils/mutations";
+import Auth from "../utils/auth";
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
+  const loggedIn = Auth.loggedIn();  
+
   const { loading, data } = useQuery(QUERY_TOP_PLANTS);
   const [savePlant] = useMutation(SAVE_PLANT);
 
@@ -42,10 +46,22 @@ const HomePage = () => {
   return (
     <div className="sub-container">
       <div className="homepage-description">
-        <p>Create an account or login to build your personal seed box! </p>
-        <p>Easily search for plants, add them to your Seed Box, and update or remove them as you go! </p>
-        <p>Tap on a plant tag below to open a Seed Packet with all the details you need—like seed depth, spacing, and sunlight requirements. </p>
-      </div>
+      {loggedIn ?
+        (<>
+            <p>Welcome to VeggieVault, {Auth.getProfile().data.username}!</p>
+            <p>Check out <Link to="/myseedbox">your personal seed box</Link> to view your plants, update notes, or add more!</p>            
+            <p>Or tap on a plant tag below to open a Seed Packet with all the details you need-like seed depth, spacing, and sunlight requirements.</p>
+          </>
+        ) : 
+        (<>
+          <p>Create an account or login to build your personal seed box! </p>
+          <p>Easily search for plants, add them to your Seed Box, and update or remove them as you go! </p>
+          <p>Tap on a plant tag below to open a Seed Packet with all the details you need—like seed depth, spacing, and sunlight requirements.</p>
+        </>
+        )
+        }        
+        </div>
+
       {loading ? (<div>Loading...</div>) :
         allVarieties.map((variety: any, index: number) => {
           const formattedTitle = `${(variety.variety)} ${(variety.plantType)}`;
