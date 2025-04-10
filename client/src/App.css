@@ -53,6 +53,11 @@ button {
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.homepage-description a {
+  color: rgb(179, 93, 65);
+  font-weight: bold;
+}
+
 body{
   height: 100%;
   margin: 0;
