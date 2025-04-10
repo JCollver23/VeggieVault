@@ -10,9 +10,10 @@
 2. [Technologies](#technologies)
 3. [Installation](#installation)
 4. [Usage](#usage)
-5. [License](#license)
-6. [Contributing](#contributing)
-7. [Contact](#contact)
+5. [Deployed Link](#deployed-link)
+6. [License](#license)
+7. [Contributing](#contributing)
+8. [Contact](#contact)
 
 ---
 
@@ -84,6 +85,12 @@ Once the app is up and running, navigate to the URL provided by your local serve
 - **Search Functionality**: Search for specific plants or varieties and add them to your seedbox.
 
 The app will authenticate users via JWT, allowing them to securely access and manage their seed box.
+
+## Deployed Link
+
+Check out **VeggieVault** live and in action!  
+🌱 [Click here to visit the deployed app on Render](https://veggievault.onrender.com/) 🌱  
+Start planning your dream garden right from your browser—anytime, anywhere.
 
 ## License
 
