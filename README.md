@@ -28,6 +28,10 @@ VeggieVault is a full-stack garden seed planting application built with the MERN
 
 ---
 
+<img src="client/src/assets/images/homepagesnip.PNG" alt="Veggie Vault Homepage" width="500"/>
+
+---
+
 ## Technologies
 
 - **Frontend**: React.js, CSS (Custom Styling)
