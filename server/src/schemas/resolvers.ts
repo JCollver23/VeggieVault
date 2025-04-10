@@ -53,14 +53,19 @@ const resolvers = {
     },
 
     searchPlants: async (_parent: any, { searchQuery }: { searchQuery: string }) => {
+      searchQuery = searchQuery.trim().toLowerCase();
+
       // If no searchQuery is provided, return all plants
-      if (!searchQuery) {
+      if (!searchQuery || searchQuery === '') {
         return Plant.find().populate('varieties');
       }
 
+      // Split searchQuery into words
+      const searchWords = searchQuery.split(' ');
+
       // Search both plants and varieties and return the plants that match either
-      const plantsFound = await Plant.find({ name: { $regex: new RegExp(searchQuery, 'i') } }).select('_id');
-      const varietiesFound = await PlantVariety.find({ variety: { $regex: new RegExp(searchQuery, 'i') } }).select('plant');
+      const plantsFound = await Plant.find({ $or: searchWords.map(word => ({ name: { $regex: new RegExp(word, 'i') } })) }).select('_id');
+      const varietiesFound = await PlantVariety.find({ $or: searchWords.map(word => ({ variety: { $regex: new RegExp(word, 'i') } })) }).select('plant');
 
       const foundIds = [...plantsFound.map((plant: any) => plant._id), ...varietiesFound.map((variety: any) => variety.plant)];
 
