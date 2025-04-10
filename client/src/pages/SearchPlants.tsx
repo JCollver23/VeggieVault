@@ -37,27 +37,11 @@ const SearchPlants = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim() !== "") {
-      searchPlants({ variables: { searchQuery } });
+      searchPlants({ variables: { searchQuery: searchQuery.trim() } });
       setNoResults(false); 
     }
   };
 
-
-  // const handleSave = async (plantId: any, varietyId: any) => {
-  //   try {
-  //     const result = await savePlant({
-  //       variables: { plantId, varietyId },
-  //     });
-  //     // if (result.data.savePlant.success) {
-  //     // window.location.assign('/myseedbox?nocache='+ new Date().getTime()); 
-  //     // return;
-  //     // } 
-  //     alert(result.data.savePlant.message);
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert("Failed to save plant variety.");
-  //   }
-  // };
 
   const handleSave = async (plantId: any, varietyId: any) => {
     try {
