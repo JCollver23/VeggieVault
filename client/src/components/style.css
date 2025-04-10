@@ -242,8 +242,12 @@ footer {
 }
 
 
-
 @media (max-width: 768px) {
+
+  html,body{
+    overflow-x: hidden;
+}
+
 
   .header-container {
     flex-direction: column;
@@ -333,5 +337,7 @@ footer {
     margin-right: 100px;
     margin-bottom: 10px
   }
- 
+  .sub-container {
+    margin-bottom: 50px;
+  }
 }
