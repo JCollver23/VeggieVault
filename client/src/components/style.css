@@ -242,8 +242,12 @@ footer {
 }
 
 
-
 @media (max-width: 768px) {
+
+  html,body{
+    overflow-x: hidden;
+}
+
 
   .header-container {
     flex-direction: column;
@@ -295,12 +299,12 @@ footer {
 
 
   .dropdown-card {
-    width: 100%;
-    margin-top: 0;
+    width: 80%;
+    margin-top: 14px;
   }
 
   .dropdown-card.open {
-    width: 80%;
+    width: 60%;
     padding: 0.8rem;
   }
 
@@ -311,5 +315,29 @@ footer {
 
   .seed-packet-details li {
     font-size: 16px;
+  }
+
+  .homepage-button-wrapper {
+    margin-right: -75px;
+  }
+
+  .add-seed-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+  }
+  
+  .add-seed-button {
+    max-width: 200px;
+    width: 100%;
+  
+  }
+  .remove-button {
+    margin-right: 100px;
+    margin-bottom: 10px
+  }
+  .sub-container {
+    margin-bottom: 50px;
   }
 }

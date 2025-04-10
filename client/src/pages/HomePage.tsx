@@ -6,6 +6,7 @@ import { SAVE_PLANT } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import '../../src/components/style.css';
 
 const HomePage = () => {
   const loggedIn = Auth.loggedIn();

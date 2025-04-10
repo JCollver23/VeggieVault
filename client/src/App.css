@@ -231,6 +231,16 @@ p{
     padding: 10px;
   }
 
+  .dropdown-card {
+    width: 80%;
+    margin-top: 14px;
+  }
+
+  .dropdown-card.open {
+    width: 70%;
+    padding: 0.8rem;
+  }
+
 
   .form-card {
     padding: 1rem;
@@ -259,4 +269,12 @@ p{
   h2 {
     font-size: 30px;
 }
+
+.add-button {
+  font-size: 18px;
+  margin-right: 55px;
+  margin-bottom: 9px;
+}
+
+
 }
