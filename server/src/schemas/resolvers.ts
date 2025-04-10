@@ -156,10 +156,10 @@ const resolvers = {
           .populate('entries.plant').populate('entries.variety');
 
         // Return the updated SeedBox to refresh the cache
-        return { success: true, message: 'Plant variety saved successfully!', data: updated };
+        return { success: true, message: 'Plant added to SeedBox!', data: updated };
       }
 
-      return { success: false, message: 'Plant is already in your SeedBox' };
+      return { success: false, message: 'This plant is already in your SeedBox' };
     },
 
     removePlant: async (_parent: any, { entryId }: { entryId: string }, context: IUserContext) => {
