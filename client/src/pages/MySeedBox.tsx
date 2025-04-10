@@ -56,7 +56,7 @@ const MySeedBox = () => {
   )) : []);
 
   return (
-    <div className="sub-container">
+    <div>
       <h2>My Seed Box</h2>
       {allEntries.length === 0 && (
         <p>Click the "Add Seed" button to get started!</p>
